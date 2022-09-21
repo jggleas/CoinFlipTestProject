@@ -12,7 +12,6 @@
 		0405D4D928DA985100A9BD33 /* CoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405D4D828DA985100A9BD33 /* CoinViewController.swift */; };
 		0405D4DB28DA998F00A9BD33 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405D4DA28DA998F00A9BD33 /* UIImageView+.swift */; };
 		040BD01F28D63DD3003A97BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BD01E28D63DD3003A97BA /* AppDelegate.swift */; };
-		040BD02128D63DD3003A97BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BD02028D63DD3003A97BA /* SceneDelegate.swift */; };
 		040BD02328D63DD3003A97BA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BD02228D63DD3003A97BA /* HomeViewController.swift */; };
 		040BD02828D63DD3003A97BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040BD02728D63DD3003A97BA /* Assets.xcassets */; };
 		040BD02B28D63DD3003A97BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040BD02928D63DD3003A97BA /* LaunchScreen.storyboard */; };
@@ -30,7 +29,6 @@
 		0405D4DA28DA998F00A9BD33 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		040BD01B28D63DD3003A97BA /* CoinFlipTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinFlipTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		040BD01E28D63DD3003A97BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		040BD02028D63DD3003A97BA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		040BD02228D63DD3003A97BA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		040BD02728D63DD3003A97BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		040BD02A28D63DD3003A97BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				040BD01E28D63DD3003A97BA /* AppDelegate.swift */,
-				040BD02028D63DD3003A97BA /* SceneDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -192,7 +189,6 @@
 				0405D4D528DA88BF00A9BD33 /* TrendingSortType.swift in Sources */,
 				0405D4D928DA985100A9BD33 /* CoinViewController.swift in Sources */,
 				0405D4D728DA984800A9BD33 /* CoinView.swift in Sources */,
-				040BD02128D63DD3003A97BA /* SceneDelegate.swift in Sources */,
 				040BD03828D69112003A97BA /* CoinApi.swift in Sources */,
 				0405D4DB28DA998F00A9BD33 /* UIImageView+.swift in Sources */,
 				040BD04328D7EE47003A97BA /* CoinTableViewCell.swift in Sources */,
@@ -343,6 +339,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -374,6 +371,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

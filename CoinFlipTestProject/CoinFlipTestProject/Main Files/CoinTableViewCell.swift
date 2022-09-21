@@ -51,6 +51,10 @@ class CoinTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        coinImageView.image = nil
+    }
+    
     func configure(coin: Coin) {
         coinImageView.loadImage(urlString: coin.small)
         nameLabel.text = coin.name
@@ -61,7 +65,7 @@ class CoinTableViewCell: UITableViewCell {
         priceLabel.text = "$\(price)"
     }
     
-    // MARK: - Varaibles
+    // MARK: - Variables
     lazy var coinImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

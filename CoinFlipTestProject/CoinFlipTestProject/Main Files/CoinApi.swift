@@ -56,6 +56,7 @@ class CoinApi {
     
     func reset() {
         coins = []
+        trending = []
     }
     
     private func sendLoadedNotification() {
@@ -131,9 +132,8 @@ class CoinApi {
     ///   - complete: A block that is called once the result is available. The block takes a `Data?` parameter containing the response data, if applicable,
     ///   an `Int` parameter containing the status code of the response, and an `Error?` parameter containing an error, if one occurred during the request.
     private func grabDataFromRequest(method: String = "GET", query: String, body: Data? = nil, complete: @escaping(Data?, Int, Error?) -> Void) {
-        let url = "https://api.coingecko.com/api/v3/" + query
-        if let ecommerceURL = URL(string: url) {
-            var request = URLRequest(url: ecommerceURL)
+        if let coinURL = URL(string: "https://api.coingecko.com/api/v3/" + query) {
+            var request = URLRequest(url: coinURL)
             request.httpMethod = method
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = body

@@ -29,7 +29,7 @@ class Coin: CoinList {
     /// Creates a new instance by decoding from the given decoder.
     /// - Parameter decoder: The decoder to read data from.
     ///
-    /// Decode and initialize a ``SplitcartModel`` object.
+    /// Decode and initialize a ``Coin`` object.
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         coinId = try container.decodeIfPresent(Int.self, forKey: .coinId) ?? -1

@@ -16,8 +16,8 @@ class HomeView: UIView {
         addSubview(backgroundImage)
         addSubview(title)
         addSubview(sortingContainer)
-        addSubview(dividerView)
         addSubview(tableView)
+        addSubview(dividerView)
         addSubview(refreshButton)
         addSubview(poweredByContainer)
         addConstraints([
@@ -38,13 +38,18 @@ class HomeView: UIView {
             
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: refreshButton.topAnchor, constant: -10),
             
+            dividerView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            dividerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dividerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dividerView.heightAnchor.constraint(equalToConstant: 1),
+            
+            refreshButton.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 10),
             refreshButton.bottomAnchor.constraint(equalTo: poweredByContainer.topAnchor, constant: -15),
             refreshButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             refreshButton.heightAnchor.constraint(equalToConstant: 45),
             
-            poweredByContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+            poweredByContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             poweredByContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             poweredByContainer.heightAnchor.constraint(equalToConstant: 20)
         ])
@@ -146,7 +151,7 @@ class HomeView: UIView {
     lazy var dividerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .separator
+        view.backgroundColor = .black
         return view
     }()
     
