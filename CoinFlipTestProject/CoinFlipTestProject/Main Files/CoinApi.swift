@@ -63,6 +63,7 @@ class CoinApi {
     }
     
     private func getBitcoinPrice() {
+        loadingBitcoin = true
         grabDataFromRequest(query: "simple/price?ids=bitcoin&vs_currencies=usd") { [weak self] (data, status, error) in
             guard let self = self else { return }
             
@@ -76,7 +77,11 @@ class CoinApi {
             
             if let data = data, let bitcoinPrice = try? JSONDecoder().decode(Parent.self, from: data) {
                 self.bitcoinPrice = bitcoinPrice.bitcoin.usd
+                self.bitcoinError = false
+            } else {
+                self.bitcoinError = true
             }
+            self.loadingBitcoin = false
         }
     }
     
@@ -87,6 +92,7 @@ class CoinApi {
             
             if let data = data, let coinData = try? JSONDecoder().decode([CoinList].self, from: data) {
                 self.coins = coinData
+                self.coinError = false
             } else {
                 self.coinError = true
             }
@@ -109,15 +115,12 @@ class CoinApi {
             
             if let data = data, let coinData = try? JSONDecoder().decode(Parent.self, from: data) {
                 self.trending = coinData.coins.map({ $0.item })
+                self.coinError = false
             } else {
                 self.coinError = true
             }
             self.loadingTrending = false
         }
-    }
-    
-    private func getTrendingPrices() {
-        loadingPrices = true
     }
     
     /// Grab the resulting data from a `URLRequest` with the given parameters.

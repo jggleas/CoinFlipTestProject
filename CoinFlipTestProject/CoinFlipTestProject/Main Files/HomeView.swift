@@ -8,47 +8,50 @@
 import UIKit
 
 class HomeView: UIView {
-    var tableViewHeightAnchor: NSLayoutConstraint!
-    
     // MARK: - Initializations
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         
+        translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundImage)
         addSubview(title)
+        addSubview(sortingContainer)
+        addSubview(dividerView)
         addSubview(tableView)
         addSubview(refreshButton)
         addSubview(poweredByContainer)
-        
         addConstraints([
             backgroundImage.topAnchor.constraint(equalTo: topAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImage.heightAnchor.constraint(equalToConstant: 160),
             
-            title.widthAnchor.constraint(equalToConstant: 200),
-            title.heightAnchor.constraint(equalToConstant: 35),
-            title.centerXAnchor.constraint(equalTo: centerXAnchor),
             title.bottomAnchor.constraint(equalTo: backgroundImage.bottomAnchor, constant: -38),
+            title.widthAnchor.constraint(equalToConstant: 260),
+            title.heightAnchor.constraint(equalToConstant: 45),
+            title.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            tableView.topAnchor.constraint(equalTo: backgroundImage.bottomAnchor, constant: 10),
+            sortingContainer.topAnchor.constraint(equalTo: backgroundImage.bottomAnchor),
+            sortingContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -1),
+            sortingContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 1),
+            sortingContainer.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -5),
+            
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: refreshButton.topAnchor, constant: -10),
             
-            refreshButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10),
+            refreshButton.bottomAnchor.constraint(equalTo: poweredByContainer.topAnchor, constant: -15),
             refreshButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             refreshButton.heightAnchor.constraint(equalToConstant: 45),
             
-            poweredByContainer.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 15),
-            poweredByContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             poweredByContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+            poweredByContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             poweredByContainer.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Not using Storyboards")
     }
     
     // MARK: - Loader Functions
@@ -78,8 +81,6 @@ class HomeView: UIView {
         imageView.image = UIImage(named: "cryptoCoins")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.black.cgColor
         return imageView
     }()
     
@@ -89,11 +90,64 @@ class HomeView: UIView {
         label.backgroundColor = UIColor.systemBackground
         label.text = "Trending Coins"
         label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
+        label.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         label.textAlignment = .center
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
         return label
+    }()
+    
+    lazy var sortingContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 0.75
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.text = "Sort by:"
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(systemName: "chevron.down")
+        imageView.tintColor = .black
+        view.addSubview(label)
+        view.addSubview(textField)
+        view.addSubview(imageView)
+        view.addConstraints([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            label.trailingAnchor.constraint(equalTo: textField.leadingAnchor, constant: -10),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            textField.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -12),
+            textField.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+            textField.widthAnchor.constraint(equalToConstant: 200),
+            textField.heightAnchor.constraint(equalToConstant: 35),
+            
+            imageView.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -10),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        return view
+    }()
+    
+    lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 5
+        textField.text = "Trending Rank"
+        textField.leftViewMode = .always
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        return textField
+    }()
+    
+    lazy var dividerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .separator
+        return view
     }()
     
     lazy var tableView: UITableView = {

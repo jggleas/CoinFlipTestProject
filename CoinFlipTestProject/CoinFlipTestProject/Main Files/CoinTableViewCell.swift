@@ -13,15 +13,14 @@ class CoinTableViewCell: UITableViewCell {
     // MARK: - Initialization and Configuration
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
         
+        selectionStyle = .none
         addSubview(coinImageView)
         addSubview(nameLabel)
         addSubview(symbolLabel)
         addSubview(marketCapRankLabel)
         addSubview(priceView)
         addSubview(priceLabel)
-        
         addConstraints([
             coinImageView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             coinImageView.trailingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: -12),
@@ -53,46 +52,13 @@ class CoinTableViewCell: UITableViewCell {
     }
     
     func configure(coin: Coin) {
-        loadImage(urlString: coin.small)
+        coinImageView.loadImage(urlString: coin.small)
         nameLabel.text = coin.name
         symbolLabel.text = "(\(coin.symbol))"
         marketCapRankLabel.text = "Market Cap Rank: \(coin.market_cap_rank)"
         let divisor = pow(10.0, Double(7))
         let price = (coin.price_btc * CoinApi.shared.bitcoinPrice * divisor).rounded() / divisor
         priceLabel.text = "$\(price)"
-    }
-    
-    private func loadImage(urlString: String) {
-        let indicator = UIActivityIndicatorView()
-        coinImageView.addSubview(indicator)
-        indicator.backgroundColor = .clear
-        indicator.frame = coinImageView.bounds
-        indicator.center.x = coinImageView.frame.width / 2
-        indicator.center.y = coinImageView.frame.height / 2
-        indicator.color = .black
-        indicator.startAnimating()
-        
-        if let data = UserDefaults.standard.data(forKey: urlString) {
-            if let image = UIImage(data: data) {
-                coinImageView.image = image
-            }
-            indicator.removeFromSuperview()
-        } else if let url = URL(string: urlString) {
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async { [weak self] in
-                            self?.coinImageView.image = image
-                            UserDefaults.standard.set(data, forKey: urlString)
-                            indicator.removeFromSuperview()
-                            
-                        }
-                    }
-                }
-            }
-        } else {
-            indicator.removeFromSuperview()
-        }
     }
     
     // MARK: - Varaibles

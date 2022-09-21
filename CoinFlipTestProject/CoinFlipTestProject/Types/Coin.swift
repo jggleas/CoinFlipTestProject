@@ -13,6 +13,7 @@ class Coin: CoinList {
     var large: String
     var slug: String
     var price_btc: Double
+    var score: Int
     
     private enum CodingKeys: String, CodingKey {
         case coinId
@@ -22,6 +23,7 @@ class Coin: CoinList {
         case large
         case slug
         case price_btc
+        case score
     }
     
     /// Creates a new instance by decoding from the given decoder.
@@ -37,18 +39,7 @@ class Coin: CoinList {
         large = try container.decodeIfPresent(String.self, forKey: .large) ?? ""
         slug = try container.decodeIfPresent(String.self, forKey: .slug) ?? ""
         price_btc = try container.decodeIfPresent(Double.self, forKey: .price_btc) ?? -1
+        score = try container.decodeIfPresent(Int.self, forKey: .score) ?? -1
         try super.init(from: decoder)
-    }
-    
-    init(id: String, symbol: String, name: String, coinId: Int, market_cap_rank: Int,
-         thumb: String, small: String, large: String, slug: String, price_btc: Double) {
-        self.coinId = coinId
-        self.market_cap_rank = market_cap_rank
-        self.thumb = thumb
-        self.small = small
-        self.large = large
-        self.slug = slug
-        self.price_btc = price_btc
-        super.init(id: id, symbol: symbol, name: name)
     }
 }
